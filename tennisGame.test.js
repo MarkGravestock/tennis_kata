@@ -1,16 +1,43 @@
 test('when a new game is started then the score is 0:0', () => {
-    expect(new Game().score()).toBe("0:0");
+    expect(new Game().score).toBe("0:0");
 });
 
-/*
-test('when server wins the score is 15:0', () => {
-    expect(score(1, 2)).toBe(3);
+
+test('when server wins the first point in a game then score is 15:0', () => {
+    const game = new Game();
+    game.serverWins();
+    expect(game.score).toBe("15:0");
 });
- */
+
+test('given the score is 15:0 when receiver wins the next point then the score is 15:15', () => {
+    const game = new Game();
+    game.serverWins();
+    game.receiverWins();
+    expect(game.score).toBe("15:15");
+});
+
+test('given the score is 15:15 when receiver wins the next point then the score is 15:30', () => {
+    const game = new Game();
+    game.serverWins();
+    game.receiverWins();
+    game.receiverWins();
+    expect(game.score).toBe("15:30");
+});
 
 class Game
 {
-    score() {
-        return "0:0";
+    score = "0:0";
+
+    serverWins() {
+        this.score = "15:0"
+    }
+
+    receiverWins() {
+        if (this.score === "15:15") {
+            this.score = "15:30";
+            return;
+        }
+
+        this.score = "15:15"
     }
 }
