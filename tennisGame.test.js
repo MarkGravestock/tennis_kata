@@ -17,10 +17,22 @@ test('given the score is 15:0 when receiver wins the next point then the score i
 });
 
 test('given the score is 15:15 when receiver wins the next point then the score is 15:30', () => {
+    // Arrange / Given
     const game = new Game();
     game.serverWins();
     game.receiverWins();
+    // Act / When
     game.receiverWins();
+    // Assert / Then
+    expect(game.score()).toBe("15:30");
+});
+
+test('given the score is initially 15:15 when receiver wins the next point then the score is 15:30', () => {
+    // Arrange / Given
+    const game = new Game(15, 15);
+    // Act / When
+    game.receiverWins();
+    // Assert / Then
     expect(game.score()).toBe("15:30");
 });
 
@@ -31,22 +43,23 @@ test('given the score is 15:15 when receiver wins the next point then the score 
 
 class Game
 {
-    #score = "0:0";
+    #serverScore = 0;
+    #receiverScore = 0;
+
+    constructor(serverScore = 0, receiverScore = 0) {
+        this.#serverScore = serverScore;
+        this.#receiverScore = receiverScore;
+    }
 
     score() {
-        return this.#score;
+        return `${this.#serverScore}:${this.#receiverScore}`;
     }
 
     serverWins() {
-        this.#score = "15:0"
+        this.#serverScore = this.#serverScore + 15;
     }
 
     receiverWins() {
-        if (this.#score === "15:15") {
-            this.#score = "15:30";
-            return;
-        }
-
-        this.#score = "15:15"
+        this.#receiverScore = this.#receiverScore + 15;
     }
 }
