@@ -1,6 +1,5 @@
-//import {describe, expect, test} from "@jest/globals";
-
-const scores = [0, 15, 30, 40];
+import {describe, expect, test} from "@jest/globals";
+import {TennisGame} from "./tennisGame";
 
 describe('Winning a Point Increases Score Correctly',() => {
 
@@ -52,42 +51,3 @@ describe('Winning a Point Increases Score Correctly',() => {
     });
 })
 
-class TennisGame {
-
-    #server = new PlayerScore();
-    #receiver = new PlayerScore()
-
-    constructor(serverScore = 0, receiverScore = 0) {
-
-        this.#server = new PlayerScore(serverScore);
-        this.#receiver = new PlayerScore(receiverScore);
-    }
-
-    score() {
-        return `${this.#server.score()}:${this.#receiver.score()}`;
-    }
-
-    serverWinsPoint() {
-        this.#server.winsPoint();
-    }
-
-    receiverWinsPoint() {
-        this.#receiver.winsPoint();
-    }
-}
-
-class PlayerScore {
-    #score = 0;
-
-    constructor(initialScore = 0) {
-        this.#score = scores.findIndex((element) => element === initialScore);
-    }
-
-    score() {
-        return `${scores[this.#score]}`;
-    }
-
-    winsPoint() {
-        this.#score = this.#score + 1;
-    }
-}
