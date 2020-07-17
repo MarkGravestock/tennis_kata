@@ -1,0 +1,1 @@
+This is an implementation of the [Tennis Kata](http://agilekatas.co.uk/katas/Tennis-Kata) in javascript (using OO features)
