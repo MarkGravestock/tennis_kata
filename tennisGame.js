@@ -16,18 +16,18 @@ export class TennisGame {
     }
 
     serverWinsPoint() {
-        if (this.#receiver.score() === 'A') {
-            this.#receiver.loosesAdvantage();
-        } else {
-            this.#server.winsPoint();
-        }
+        TennisGame.#winPoint(this.#server, this.#receiver)
     }
 
     receiverWinsPoint() {
-        if (this.#server.score() === 'A') {
-            this.#server.loosesAdvantage();
+        TennisGame.#winPoint(this.#receiver, this.#server)
+    }
+
+    static #winPoint(winner, loser) {
+        if (loser.score() === 'A') {
+            loser.loosesAdvantage();
         } else {
-            this.#receiver.winsPoint();
+            winner.winsPoint();
         }
     }
 }
