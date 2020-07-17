@@ -16,7 +16,7 @@ export class PlayerScore {
         this.#score++;
     }
 
-    loosesPoint() {
+    loosesAdvantage() {
         this.#score--;
     }
 }

@@ -16,12 +16,16 @@ export class TennisGame {
     }
 
     serverWinsPoint() {
-        this.#server.winsPoint();
+        if (this.#receiver.score() === 'A') {
+            this.#receiver.loosesAdvantage();
+        } else {
+            this.#server.winsPoint();
+        }
     }
 
     receiverWinsPoint() {
         if (this.#server.score() === 'A') {
-            this.#server.loosesPoint();
+            this.#server.loosesAdvantage();
         } else {
             this.#receiver.winsPoint();
         }

@@ -67,6 +67,14 @@ describe('Deuce and Advantage are Scored Correctly', () => {
         // Assert / Then
         expect(game.score()).toBe("40:40");
     })
+
+    test('Given the score is 40:A when the server wins a point then the score should be 40:40', () => {
+        const game = new TennisGame("40", "A");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:40");
+    })
 })
 
 /*describe('Points are Scored Correctly', () => {
