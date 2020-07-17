@@ -3,14 +3,14 @@ import {scores} from "./scores";
 export class PlayerScore {
 
     constructor(initialScore = 0) {
-        this.score = scores.findIndex((element) => element === initialScore);
+        this._score = scores.findIndex((element) => element === initialScore);
     }
 
     score() {
-        return `${scores[this.score]}`;
+        return `${scores[this._score]}`;
     }
 
     winsPoint() {
-        this.score = this.score + 1;
+        this._score = this._score + 1;
     }
 }

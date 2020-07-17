@@ -4,19 +4,19 @@ export class TennisGame {
 
     constructor(serverScore = 0, receiverScore = 0) {
 
-        this.server = new PlayerScore(serverScore);
-        this.receiver = new PlayerScore(receiverScore);
+        this._server = new PlayerScore(serverScore);
+        this._receiver = new PlayerScore(receiverScore);
     }
 
     score() {
-        return `${this.server.score()}:${this.receiver.score()}`;
+        return `${this._server.score()}:${this._receiver.score()}`;
     }
 
     serverWinsPoint() {
-        this.server.winsPoint();
+        this._server.winsPoint();
     }
 
     receiverWinsPoint() {
-        this.receiver.winsPoint();
+        this._receiver.winsPoint();
     }
 }
