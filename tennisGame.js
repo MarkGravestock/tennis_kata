@@ -2,21 +2,24 @@ import {PlayerScore} from "./playerScore";
 
 export class TennisGame {
 
+    #server;
+    #receiver;
+    
     constructor(serverScore = 0, receiverScore = 0) {
 
-        this._server = new PlayerScore(serverScore);
-        this._receiver = new PlayerScore(receiverScore);
+        this.#server = new PlayerScore(serverScore);
+        this.#receiver = new PlayerScore(receiverScore);
     }
 
     score() {
-        return `${this._server.score()}:${this._receiver.score()}`;
+        return `${this.#server.score()}:${this.#receiver.score()}`;
     }
 
     serverWinsPoint() {
-        this._server.winsPoint();
+        this.#server.winsPoint();
     }
 
     receiverWinsPoint() {
-        this._receiver.winsPoint();
+        this.#receiver.winsPoint();
     }
 }
