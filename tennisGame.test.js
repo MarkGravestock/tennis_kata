@@ -34,7 +34,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 15:15 when receiver wins the next point then the score is 15:30', () => {
         // Arrange / Given
-        const game = new TennisGame(15, 15);
+        const game = new TennisGame("15", "15");
         // Act / When
         game.receiverWinsPoint();
         // Assert / Then
@@ -43,7 +43,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 30:30 when server wins the next point then the score is 40:30', () => {
         // Arrange / Given
-        const game = new TennisGame(30, 30);
+        const game = new TennisGame("30", "30");
         // Act / When
         game.serverWinsPoint();
         // Assert / Then
@@ -51,3 +51,27 @@ describe('Winning a Point Increases Score Correctly',() => {
     });
 })
 
+describe('Deuce and Advantage are Scored Correctly', () => {
+    test('Given the score is 40:40 when the receiver wins a point then the score should be 40:A', () => {
+        const game = new TennisGame("40", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:A");
+    })
+
+    test('Given the score is A:40 when the receiver wins a point then the score should be 40:40', () => {
+        const game = new TennisGame("A", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:40");
+    })
+})
+
+/*describe('Points are Scored Correctly', () => {
+    test('Given the score is 40:30 When the server wins a point then the server should win', () => {
+        fail()
+    })
+    }
+)*/
