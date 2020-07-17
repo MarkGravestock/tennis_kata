@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "untitled",
   "version": "1.0.0",
   "description": "",
@@ -11,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.1.0"
+  },
+  "dependencies": {
+    "@jest/globals": "^26.1.0"
   }
 }

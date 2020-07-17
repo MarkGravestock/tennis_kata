@@ -1,18 +1,22 @@
+//import {describe, expect, test} from "@jest/globals";
+
+const scores = [0, 15, 30, 40];
+
 describe('Winning a Point Increases Score Correctly',() => {
 
     test('when a new game is started then the score is 0:0', () => {
-        expect(new Game().score()).toBe("0:0");
+        expect(new TennisGame().score()).toBe("0:0");
     });
 
 
     test('when server wins the first point in a game then score is 15:0', () => {
-        const game = new Game();
+        const game = new TennisGame();
         game.serverWinsPoint();
         expect(game.score()).toBe("15:0");
     });
 
     test('given the score is 15:0 when receiver wins the next point then the score is 15:15', () => {
-        const game = new Game();
+        const game = new TennisGame();
         game.serverWinsPoint();
         game.receiverWinsPoint();
         expect(game.score()).toBe("15:15");
@@ -20,7 +24,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is 15:15 when receiver wins the next point then the score is 15:30', () => {
         // Arrange / Given
-        const game = new Game();
+        const game = new TennisGame();
         game.serverWinsPoint();
         game.receiverWinsPoint();
         // Act / When
@@ -31,7 +35,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 15:15 when receiver wins the next point then the score is 15:30', () => {
         // Arrange / Given
-        const game = new Game(15, 15);
+        const game = new TennisGame(15, 15);
         // Act / When
         game.receiverWinsPoint();
         // Assert / Then
@@ -40,7 +44,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 30:30 when server wins the next point then the score is 40:30', () => {
         // Arrange / Given
-        const game = new Game(30, 30);
+        const game = new TennisGame(30, 30);
         // Act / When
         game.serverWinsPoint();
         // Assert / Then
@@ -48,21 +52,19 @@ describe('Winning a Point Increases Score Correctly',() => {
     });
 })
 
-const scores = [0, 15, 30 ,40];
-
-class Game {
+class TennisGame {
 
     #server = new PlayerScore();
-    #receiverScore = 0;
+    #receiver = new PlayerScore()
 
     constructor(serverScore = 0, receiverScore = 0) {
 
         this.#server = new PlayerScore(serverScore);
-        this.#receiverScore = scores.findIndex((element) => element === receiverScore);
+        this.#receiver = new PlayerScore(receiverScore);
     }
 
     score() {
-        return `${this.#server.score()}:${scores[this.#receiverScore]}`;
+        return `${this.#server.score()}:${this.#receiver.score()}`;
     }
 
     serverWinsPoint() {
@@ -70,7 +72,7 @@ class Game {
     }
 
     receiverWinsPoint() {
-        this.#receiverScore = this.#receiverScore + 1;
+        this.#receiver.winsPoint();
     }
 }
 
