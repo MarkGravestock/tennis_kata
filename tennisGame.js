@@ -17,7 +17,7 @@ export class TennisGame {
     }
 
     serverWinsPoint() {
-        if (this.#server.score() === '40' && this.#receiver.hasScoreLessThan('40') || this.#server.score() === 'A' && this.#receiver.hasScoreLessThan('A')) {
+        if (this.hasWon(this.#server, this.#receiver)) {
             this.#serverWins = true;
         }
 
@@ -25,11 +25,19 @@ export class TennisGame {
     }
 
     receiverWinsPoint() {
-        if (this.#receiver.score() === 'A' && this.#server.hasScoreLessThan('A')) {
+        if (this.hasWon(this.#receiver, this.#server)) {
             this.#receiverWon = true;
         }
 
         TennisGame.#winPoint(this.#receiver, this.#server)
+    }
+
+    hasWon(candidateWinner, opponent) {
+        return this.hasWonWithScore(candidateWinner, opponent, '40') || this.hasWonWithScore(candidateWinner, opponent, 'A');
+    }
+
+    hasWonWithScore(candidateWinner, opponent, candidateScore) {
+        return candidateWinner.score() === candidateScore && opponent.hasScoreLessThan(candidateScore)
     }
 
     static #winPoint(winner, loser) {

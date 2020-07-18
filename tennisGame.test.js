@@ -99,7 +99,6 @@ describe('Winning Points are Scored Correctly', () => {
         const score = new PlayerScore('30');
 
         expect(score.hasScoreLessThan('40')).toBe(true);
-
     })
 
     test( 'Given the score is 40:A When the receiver wins a point then the receiver should win', () => {
@@ -109,6 +108,15 @@ describe('Winning Points are Scored Correctly', () => {
         // Assert / Then
         expect(game.hasReceiverWon()).toBe(true);
     })
+
+    test( 'Given the score is 30:40 When the receiver wins a point then the receiver should win', () => {
+        const game = new TennisGame("30", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.hasReceiverWon()).toBe(true);
+    })
 })
 
-// A:A is invalid initial score
+// A:A is invalid initial score - but it setting an initial score a feature or just a testing convenience really? You could play the game through (events?) to reach the desired initial state
+// - see a couple of the early tests.
