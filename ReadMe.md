@@ -23,5 +23,12 @@ Have got babel and jest to play nicely, need to add ES proposal plugs to babel. 
 What is the scope of the Unit? In these tests I'm aiming to test via Tennis Game, really Player Score is an implementation detail. I have had to 'drop a gear'
 to test a method on Player Score, which was OK as I've exported it. Need to review the value of the introduced test.
 
+##### Responsibilities
 
+Should more responsiblity be more to the player score. For example the winning detection could move onto it, although it would have to be provided the opponent score,
+i'm not sure the level of coupling would change, maybe there is a smell of feature envy?
 
+##### TODO
+
+- A:A is invalid initial score - but it setting an initial score a feature or just a testing convenience really? You could play the game through (events?) to reach the desired initial state - see a couple of the early tests.
+- Winning scores are probably not right, as the Game score is incremented when the game is won. 

@@ -117,6 +117,3 @@ describe('Winning Points are Scored Correctly', () => {
         expect(game.hasReceiverWon()).toBe(true);
     })
 })
-
-// A:A is invalid initial score - but it setting an initial score a feature or just a testing convenience really? You could play the game through (events?) to reach the desired initial state
-// - see a couple of the early tests.
