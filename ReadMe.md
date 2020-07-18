@@ -28,6 +28,12 @@ to test a method on Player Score, which was OK as I've exported it. Need to revi
 Should more responsiblity be more to the player score. For example the winning detection could move onto it, although it would have to be provided the opponent score,
 i'm not sure the level of coupling would change, maybe there is a smell of feature envy?
 
+##### Overall Approach
+
+I realised I didn't fully read the special rules section, which meant that I only used the example GWT scenarios in my implementation. It's nice
+to know the abstract rules, but using an SbE approach would suggest moving to more concrete examples and distilling rules from there, which I did
+internally, but the actual rules as state are not directly implemented. It'd be interesting next time to do it again with them in mind.
+
 ##### TODO
 
 - A:A is invalid initial score - but it setting an initial score a feature or just a testing convenience really? You could play the game through (events?) to reach the desired initial state - see a couple of the early tests.
