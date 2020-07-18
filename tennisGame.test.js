@@ -1,5 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
 import {TennisGame} from "./tennisGame";
+import {PlayerScore} from "./playerScore";
 
 describe('Winning a Point Increases Score Correctly',() => {
 
@@ -77,9 +78,22 @@ describe('Deuce and Advantage are Scored Correctly', () => {
     })
 })
 
-/*describe('Points are Scored Correctly', () => {
+describe('Winning Points are Scored Correctly', () => {
     test('Given the score is 40:30 When the server wins a point then the server should win', () => {
-        fail()
+        const game = new TennisGame("40", "30");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.hasServerWon()).toBe(true);
+    })
+
+    test('Player score can check it is less than a given score', () => {
+        const score = new PlayerScore('30');
+
+        expect(score.hasScoreLessThan('40')).toBe(true);
+
     })
     }
-)*/
+)
+
+// A:A is invalid initial score

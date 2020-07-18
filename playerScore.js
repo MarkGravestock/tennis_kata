@@ -12,6 +12,10 @@ export class PlayerScore {
         return `${scores[this.#score]}`;
     }
 
+    hasScoreLessThan(opponentScore) {
+        return this.#score < scores.findIndex((element) => element === opponentScore);
+    }
+
     winsPoint() {
         this.#score++;
     }

@@ -4,7 +4,8 @@ export class TennisGame {
 
     #server;
     #receiver;
-    
+    #serverWins = false;
+
     constructor(serverScore = '0', receiverScore = '0') {
 
         this.#server = new PlayerScore(serverScore);
@@ -16,6 +17,10 @@ export class TennisGame {
     }
 
     serverWinsPoint() {
+        if (this.#server.score() === '40' && this.#receiver.hasScoreLessThan('40')) {
+            this.#serverWins = true;
+        }
+
         TennisGame.#winPoint(this.#server, this.#receiver)
     }
 
@@ -29,5 +34,9 @@ export class TennisGame {
         } else {
             winner.winsPoint();
         }
+    }
+
+    hasServerWon() {
+        return this.#serverWins;
     }
 }
