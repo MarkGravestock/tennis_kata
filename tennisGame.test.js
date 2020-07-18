@@ -87,13 +87,28 @@ describe('Winning Points are Scored Correctly', () => {
         expect(game.hasServerWon()).toBe(true);
     })
 
+    test('Given the score is A:40 When the server wins a point then the server should win', () => {
+        const game = new TennisGame("A", "40");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.hasServerWon()).toBe(true);
+    })
+
     test('Player score can check it is less than a given score', () => {
         const score = new PlayerScore('30');
 
         expect(score.hasScoreLessThan('40')).toBe(true);
 
     })
-    }
-)
+
+    test( 'Given the score is 40:A When the receiver wins a point then the receiver should win', () => {
+        const game = new TennisGame("40", "A");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.hasReceiverWon()).toBe(true);
+    })
+})
 
 // A:A is invalid initial score
