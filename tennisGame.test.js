@@ -1,6 +1,6 @@
-//import {describe, expect, test} from "@jest/globals";
-
-const scores = [0, 15, 30, 40];
+import {describe, expect, test} from "@jest/globals";
+import {TennisGame} from "./tennisGame";
+import {PlayerScore} from "./playerScore";
 
 describe('Winning a Point Increases Score Correctly',() => {
 
@@ -35,7 +35,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 15:15 when receiver wins the next point then the score is 15:30', () => {
         // Arrange / Given
-        const game = new TennisGame(15, 15);
+        const game = new TennisGame("15", "15");
         // Act / When
         game.receiverWinsPoint();
         // Assert / Then
@@ -44,7 +44,7 @@ describe('Winning a Point Increases Score Correctly',() => {
 
     test('given the score is initially 30:30 when server wins the next point then the score is 40:30', () => {
         // Arrange / Given
-        const game = new TennisGame(30, 30);
+        const game = new TennisGame("30", "30");
         // Act / When
         game.serverWinsPoint();
         // Assert / Then
@@ -52,42 +52,68 @@ describe('Winning a Point Increases Score Correctly',() => {
     });
 })
 
-class TennisGame {
+describe('Deuce and Advantage are Scored Correctly', () => {
+    test('Given the score is 40:40 when the receiver wins a point then the score should be 40:A', () => {
+        const game = new TennisGame("40", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:A");
+    })
 
-    #server = new PlayerScore();
-    #receiver = new PlayerScore()
+    test('Given the score is A:40 when the receiver wins a point then the score should be 40:40', () => {
+        const game = new TennisGame("A", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:40");
+    })
 
-    constructor(serverScore = 0, receiverScore = 0) {
+    test('Given the score is 40:A when the server wins a point then the score should be 40:40', () => {
+        const game = new TennisGame("40", "A");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.score()).toBe("40:40");
+    })
+})
 
-        this.#server = new PlayerScore(serverScore);
-        this.#receiver = new PlayerScore(receiverScore);
-    }
+describe('Winning Points are Scored Correctly', () => {
+    test('Given the score is 40:30 When the server wins a point then the server should win', () => {
+        const game = new TennisGame("40", "30");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.hasServerWon()).toBe(true);
+    })
 
-    score() {
-        return `${this.#server.score()}:${this.#receiver.score()}`;
-    }
+    test('Given the score is A:40 When the server wins a point then the server should win', () => {
+        const game = new TennisGame("A", "40");
+        // Act / When
+        game.serverWinsPoint();
+        // Assert / Then
+        expect(game.hasServerWon()).toBe(true);
+    })
 
-    serverWinsPoint() {
-        this.#server.winsPoint();
-    }
+    test('Player score can check it is less than a given score', () => {
+        const score = new PlayerScore('30');
 
-    receiverWinsPoint() {
-        this.#receiver.winsPoint();
-    }
-}
+        expect(score.hasScoreLessThan('40')).toBe(true);
+    })
 
-class PlayerScore {
-    #score = 0;
+    test( 'Given the score is 40:A When the receiver wins a point then the receiver should win', () => {
+        const game = new TennisGame("40", "A");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.hasReceiverWon()).toBe(true);
+    })
 
-    constructor(initialScore = 0) {
-        this.#score = scores.findIndex((element) => element === initialScore);
-    }
-
-    score() {
-        return `${scores[this.#score]}`;
-    }
-
-    winsPoint() {
-        this.#score = this.#score + 1;
-    }
-}
+    test( 'Given the score is 30:40 When the receiver wins a point then the receiver should win', () => {
+        const game = new TennisGame("30", "40");
+        // Act / When
+        game.receiverWinsPoint();
+        // Assert / Then
+        expect(game.hasReceiverWon()).toBe(true);
+    })
+})
