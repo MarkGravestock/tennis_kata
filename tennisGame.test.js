@@ -1,6 +1,5 @@
 import {describe, expect, test} from "@jest/globals";
 import {TennisGame} from "./tennisGame";
-import {PlayerScore} from "./playerScore";
 
 describe('Winning a Point Increases Score Correctly',() => {
 
@@ -93,12 +92,6 @@ describe('Winning Points are Scored Correctly', () => {
         game.serverWinsPoint();
         // Assert / Then
         expect(game.hasServerWon()).toBe(true);
-    })
-
-    test('Player score can check it is less than a given score', () => {
-        const score = new PlayerScore('30');
-
-        expect(score.hasScoreLessThan('40')).toBe(true);
     })
 
     test( 'Given the score is 40:A When the receiver wins a point then the receiver should win', () => {

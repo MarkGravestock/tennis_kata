@@ -22,6 +22,9 @@ Have got babel and jest to play nicely, need to add ES proposal plugs to babel. 
 
 What is the scope of the Unit? In these tests I'm aiming to test via Tennis Game, really Player Score is an implementation detail. I have had to 'drop a gear'
 to test a method on Player Score, which was OK as I've exported it. Need to review the value of the introduced test.
+OK after review have removed the test which I think only had value during the development, and is sufficiently covered by the Tennis Game tests. This allows
+Player Score to be an implementation detail of Tennis Game, and scores to an implementation detail of Player Score. Refactoring these 2 classes should be possible
+using the test suite as it stands. 
 
 ##### Responsibilities
 
