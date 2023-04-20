@@ -20,7 +20,7 @@
     "@babel/plugin-syntax-import-meta": "^7.0.0",
     "@babel/preset-env": "^7.10.4",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.4.2",
+    "babel-jest": "^29.5.0",
     "jest": "^26.1.0"
   },
   "dependencies": {
